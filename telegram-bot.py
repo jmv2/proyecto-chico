@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import telebot
 import requests
 import json
@@ -23,7 +26,7 @@ def contarLineasArchivo(archivo):
 
 def frasesMasBellasDelMundo(archivo):
     
-    lasFrasesMasBellasDelMundo = open(archivo, 'r')
+    lasFrasesMasBellasDelMundo = open(archivo, 'r', encoding='utf-8')
     fraseAleatoria = (random.randint(1,contarLineasArchivo(archivo)))
     contador = 0
 
@@ -53,10 +56,10 @@ def chuck():
 def manualDelChico():
     opciones = """
 
-        /frases: Te dira algunas de sus frases mas bellas del mundo, para dedicarla a alguna peuca
-        /chuck: Experimental para probar API Rest
-        /temblor: En construcción
-        /tiempo: En un futuro
+        /frases: Te dirá algunas de sus frases mas bellas del mundo, para dedicarla a alguna peuca.
+        /chuck: Experimental para probar API Rest.
+        /temblor: En construcción.
+        /tiempo: En un futuro.
 
     """
     return opciones
@@ -76,7 +79,8 @@ def main():
     @tb.message_handler(commands=['chuck'])
     def send_message(message):
         tb.reply_to(message, chuck())
-    
+
+
     tb.polling()
 
 if __name__ == "__main__":
