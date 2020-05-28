@@ -76,14 +76,15 @@ def tiempoHoy():
 
     min = todayResponse.get('tempmin')
     max = todayResponse.get('tempmax')
+    dayName = todayResponse.get('name')
 
     r = """
         
-        Aqui les voy a dar el tiempo a los muy aweonaos
+        La temperatura para hoy {dayWeek}
         Temperatura mínima : {tempMin} °C
         Temperatura máxima : {tempMax} °C
     
-    """.format(tempMin = min, tempMax = max)
+    """.format(dayWeek= dayName,tempMin = min, tempMax = max)
 
     return r
 
