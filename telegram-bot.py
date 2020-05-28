@@ -6,6 +6,7 @@ import requests
 import json
 import time
 import random
+#import tiempo
 
 tokenBotTelegram = '787110238:AAFqLDrocbbOnSbKp8iWmthCEJwKfnw3M2Y'
 id_grupo='-1001250058237'
@@ -58,11 +59,31 @@ def manualDelChico():
 
         /frases: Te dirá algunas de sus frases mas bellas del mundo, para dedicarla a alguna peuca.
         /chuck: Experimental para probar API Rest.
+        /tiempo: El tiempo de hoy.
         /temblor: En construcción.
-        /tiempo: En un futuro.
 
     """
     return opciones
+
+def tiempoHoy():
+
+    url = 'http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=4y6u4lm6bjpi&v=3.0'
+    response = requests.get(url)
+    contenido = json.loads(response.content)
+
+    daysDict = contenido['day']
+    todayResponse = daysDict.get('1')
+
+    min = todayResponse.get('tempmin')
+    max = todayResponse.get('tempmax')
+
+    r = """
+    Aqui les voy a dar el tiempo a los muy aweonaos
+    Temperatura mínima : {tempMin} °C
+    Temperatura máxima : {tempMax} °C
+    """.format(tempMin = min, tempMax = max)
+
+    return r
 
 def main():
 
@@ -79,6 +100,10 @@ def main():
     @tb.message_handler(commands=['chuck'])
     def send_message(message):
         tb.reply_to(message, chuck())
+
+    @tb.message_handler(commands=['tiempo'])
+    def send_message(message):
+        tb.reply_to(message, tiempoHoy())
 
 
     tb.polling()
