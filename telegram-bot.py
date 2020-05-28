@@ -84,7 +84,7 @@ def tiempoHoy():
         Temperatura mínima : {tempMin} °C
         Temperatura máxima : {tempMax} °C
     
-    """.format(dayWeek= dayName,tempMin = min, tempMax = max)
+    """.format(dayWeek = dayName, tempMin = min, tempMax = max)
 
     return r
 
