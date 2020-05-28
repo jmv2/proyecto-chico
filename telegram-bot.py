@@ -6,7 +6,7 @@ import requests
 import json
 import time
 import random
-#import tiempo
+
 
 tokenBotTelegram = '787110238:AAFqLDrocbbOnSbKp8iWmthCEJwKfnw3M2Y'
 id_grupo='-1001250058237'
@@ -104,8 +104,8 @@ def main():
     @tb.message_handler(commands=['tiempo'])
     def send_message(message):
         tb.reply_to(message, tiempoHoy())
-
-
+    
+    
     tb.polling()
 
 if __name__ == "__main__":
