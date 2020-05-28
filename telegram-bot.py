@@ -69,33 +69,33 @@ def tiempoHoy():
 
     url = 'http://api.meteored.cl/index.php?api_lang=cl&localidad=18578&affiliate_id=4y6u4lm6bjpi&v=3.0'
     response = requests.get(url)
-    contenido = json.loads(response.content)
+    contenido = json.loads(response.content.decode('utf-8'))
 
-    daysDict = contenido['day']
+    daysDict = contenido.get('day')
     todayResponse = daysDict.get('1')
 
     min = todayResponse.get('tempmin')
     max = todayResponse.get('tempmax')
 
     r = """
-    Aqui les voy a dar el tiempo a los muy aweonaos
-    Temperatura mínima : {tempMin} °C
-    Temperatura máxima : {tempMax} °C
+        
+        Aqui les voy a dar el tiempo a los muy aweonaos
+        Temperatura mínima : {tempMin} °C
+        Temperatura máxima : {tempMax} °C
+    
     """.format(tempMin = min, tempMax = max)
 
     return r
 
 def main():
 
-    @tb.message_handler(commands=['start', 'help'])
+    @tb.message_handler(commands=['ayudame'])
     def send_welcome(message):
         tb.reply_to(message, manualDelChico())
-
 
     @tb.message_handler(commands=['frases'])
     def send_message(message):
         tb.reply_to(message, frasesMasBellasDelMundo('frases.txt'))
-
 
     @tb.message_handler(commands=['chuck'])
     def send_message(message):
@@ -105,7 +105,7 @@ def main():
     def send_message(message):
         tb.reply_to(message, tiempoHoy())
     
-    
+
     tb.polling()
 
 if __name__ == "__main__":
